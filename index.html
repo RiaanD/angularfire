@@ -1,15 +1,42 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
+<html ng-app="sampleApp">
+    <head>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>TestFireBase</title>
-    <link rel="stylesheet" src="style.css"/>
-</head>
-<body>
+        <title>Firebase Template</title>       
+        
+        
+        
+    </head>
+    <body ng-controller="SampleCtrl" >
 
+       
 
-    <script src="jquery-1.12.4.min.js"></script>
-    <script src="script.js"></script>
-</body>
+       <p>Our Data Here:</p> 
+       <p>{{data.message}}</p>
+
+        <!-- Angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+        <!-- Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+        <!-- AngularFire -->
+        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+         
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBYmixohRDEBATqpyjL-bi7RM32jUJkGCw",
+            authDomain: "engage-888e6.firebaseapp.com",
+            databaseURL: "https://engage-888e6.firebaseio.com",
+            storageBucket: "engage-888e6.appspot.com",
+            messagingSenderId: "579464643282"
+        };
+        firebase.initializeApp(config);
+        </script>
+
+        <!-- Custum Js -->
+        <script type="text/javascript" src="app.js"></script>
+       
+    </body>
 </html>

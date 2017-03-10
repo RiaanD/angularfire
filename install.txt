@@ -1,7 +1,8 @@
 PreReq:
 GitBash-registered account.
 GoogleAcc.
-FireBaseAcc.
+FireBaseAcc. https://firebase.google.com/docs/
+-In FirBase new project. a Authentication Project, find "WEB SETUP" at top, use the settings for later.
 
 Instalation:
 1.Create a Git Repo first to get url.
@@ -33,10 +34,51 @@ go into the branch, ie 'git checkout branchName', by the way wich also changes y
 then, 'git merge branchName' this merges the named Branch to the branch you are in.
 
 2.1 Create GoogleAcc.
-2.2 Create FirBase Project.
+2.2 Create FireBase Project.
+
+3.1 In order to use AngularFire in your project, you need to include the following files in your HTML:
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script> -->
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+3.2 Initialize the Firebase SDK / use settings provided by FireBase site:
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBYmixohRDEBATqpyjL-bi7RM32jUJkGCw",
+    authDomain: "engage-888e6.firebaseapp.com",
+    databaseURL: "https://engage-888e6.firebaseio.com",
+    storageBucket: "engage-888e6.appspot.com",
+    messagingSenderId: "579464643282"
+  };
+  firebase.initializeApp(config);
+</script>
+
+In the example above, $scope.data is going to be populated from the remote server.
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+Ref: For the assembly of this base App: https://github.com/firebase/angularfire/blob/master/docs/quickstart.md
 Ref: https://docs.angularjs.org/tutorial
 Ref: https://github.com/firebase/angularfire#getting-started-with-firebase
+Ref: https://firebase.google.com/docs/
+Ref: https://console.firebase.google.com
+
