@@ -10,7 +10,7 @@ sampleApp.controller("SampleCtrl",function SampleCtrl($scope, $firebaseObject) {
   // putting a console.log here won't work, see below
 
   
-  $scope.data.message = "hello again user!";
+  $scope.data.message = "hello again Boss";
 
   $scope.data.$save().then(function(ref) {
   ref.key === $scope.data.$id; // true
