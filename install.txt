@@ -1,0 +1,42 @@
+PreReq:
+GitBash-registered account.
+GoogleAcc.
+FireBaseAcc.
+
+Instalation:
+1.Create a Git Repo first to get url.
+ or use 'Git clone url' if there was a existing repo with startup files.
+
+1.1 with new created repo, right click on local folder, open GitBash here, aftr adding your startup files, html, jquery wahtever do the following:
+ 
+git add . - staging
+git commit . -m 'first startup files' - commit, but not synch wit server yet
+git push - to Server
+
+or, to create rep from command line:
+..after commit:
+git remote add origin 'repo url'
+git push
+
+Branches.
+there after, manage a Master branch with startup, but create new branches for extention to project. Merge Master wit hnew branch:
+to view branches, 'git branch'
+then, create a branch to work on 'master must always be Base', so use 'git checkout -b [nameBranch]'
+then, push the Branch, 'git push origin nameBranch'
+to view, 'git branch'
+
+Switch branches:
+git checkout branchName
+
+Merge branches:
+go into the branch, ie 'git checkout branchName', by the way wich also changes you local machine's foler contents : )
+then, 'git merge branchName' this merges the named Branch to the branch you are in.
+
+2.1 Create GoogleAcc.
+2.2 Create FirBase Project.
+
+
+
+
+Ref: https://docs.angularjs.org/tutorial
+Ref: https://github.com/firebase/angularfire#getting-started-with-firebase
