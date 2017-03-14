@@ -25,6 +25,7 @@
 
     <div id="sign-in-status"></div>
     <div id="sign-in"></div>
+    <div id="sign-up"></div>
     <div id="account-details"></div>
 
 
@@ -46,7 +47,7 @@
     <!--jQuery-->
     <script src="jquery-1.12.4.min.js"></script>
 
-    <script>
+    <script type=text/javascript>
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyBYmixohRDEBATqpyjL-bi7RM32jUJkGCw",
@@ -90,6 +91,7 @@
                 user.getToken().then(function(accessToken) {
                 document.getElementById('sign-in-status').textContent = 'Signed in';
                 document.getElementById('sign-in').textContent = 'Sign out';
+                
                 document.getElementById('account-details').textContent = JSON.stringify({
                     displayName: displayName,
                     email: email,
@@ -104,6 +106,7 @@
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('sign-up').textContent = 'Sign up';
                 document.getElementById('account-details').textContent = 'null';
             }
             }, function(error) {
@@ -115,8 +118,35 @@
         initApp()
       });
 
+      
+            
 
 
+
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#sign-in').click(function(){
+                    if($(this).html() == 'Sign out')
+                    {
+                        firebase.auth().signOut();
+                    } else
+                    {
+                        window.location.href = 'index.html';
+                    }
+                });
+
+                // this is suppose to take to a Form, and the Form is suppose to submit the below.
+                $('#sign-up').click(function(){
+                    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ...
+                    });
+                });
+               
+            });
         </script>
 
     <!-- Custum Js -->

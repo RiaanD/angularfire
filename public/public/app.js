@@ -24,11 +24,11 @@ sampleApp.controller("SampleCtrl", function SampleCtrl($scope, $firebaseObject) 
 });
 
 
-// Handle User
-$('#sign-in').click(function(){
-  signOut();
-  ui.start('#firebaseui-auth-container', uiConfig);
-});
+
+  
+
+
+
 
 
 

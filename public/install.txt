@@ -1,0 +1,118 @@
+PreReq:
+GitBash-registered account.
+GoogleAcc.
+FireBaseAcc. https://firebase.google.com/docs/
+-In FirBase new project. a Authentication Project, find "WEB SETUP" at top, use the settings for later.
+
+Instalation:
+1.Create a Git Repo first to get url.
+ or use 'Git clone url' if there was a existing repo with startup files.
+
+1.1 with new created repo, right click on local folder, open GitBash here, aftr adding your startup files, html, jquery wahtever do the following:
+ 
+git add . - staging
+git commit . -m 'first startup files' - commit, but not synch wit server yet
+git push - to Server
+
+or, to create rep from command line:
+..after commit:
+git remote add origin 'repo url'
+git push
+
+Branches.
+there after, manage a Master branch with startup, but create new branches for extention to project. Merge Master wit hnew branch:
+to view branches, 'git branch'
+then, create a branch to work on 'master must always be Base', so use 'git checkout -b [nameBranch]'
+then, push the Branch, 'git push origin nameBranch'
+to view, 'git branch'
+
+Switch branches:
+git checkout branchName
+
+Merge branches:
+go into the branch, ie 'git checkout branchName', by the way wich also changes you local machine's foler contents : )
+then, 'git merge branchName' this merges the named Branch to the branch you are in.
+
+2.1 Create GoogleAcc.
+2.2 Create FireBase Project.
+
+3.1 In order to use AngularFire in your project, you need to include the following files in your HTML:
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script> -->
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+3.2 Initialize the Firebase SDK / use settings provided by FireBase site:
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBYmixohRDEBATqpyjL-bi7RM32jUJkGCw",
+    authDomain: "engage-888e6.firebaseapp.com",
+    databaseURL: "https://engage-888e6.firebaseio.com",
+    storageBucket: "engage-888e6.appspot.com",
+    messagingSenderId: "579464643282"
+  };
+  firebase.initializeApp(config);
+</script>
+
+In the example above, $scope.data is going to be populated from the remote server.
+
+4.1 FireBase CLI and Hosting
+4.1.1 Install Firebase CLI
+Install Firebase CLI:
+ npm install -g firebase-tools  "https://firebase.google.com/docs/hosting/quickstart"
+Initialize:
+ firebase init
+Deploy:
+ firebase deploy
+Test Locally:
+ firebase serve
+	 
+	 ...
+	 C:\Gibson\Code\angular-git\angularfire\public>firebase deploy
+
+	=== Deploying to 'engage-888e6'...
+
+	i  deploying hosting
+	i  hosting: preparing public directory for upload...
+	+  hosting: public folder uploaded successfully
+	+  hosting: 1 files uploaded successfully
+	i  starting release process (may take several minutes)...
+
+	+  Deploy complete!
+
+	Project Console: https://console.firebase.google.com/project/engage-888e6/overview
+	Hosting URL: https://engage-888e6.firebaseapp.com
+	C:\Gibson\Code\angular-git\angularfire\public>
+	
+Using further tutorials to get it working...:
+https://github.com/firebase/FirebaseUI-Web#installation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ref: For the assembly of this base App: https://github.com/firebase/angularfire/blob/master/docs/quickstart.md
+Ref: https://docs.angularjs.org/tutorial
+Ref: https://github.com/firebase/angularfire#getting-started-with-firebase
+Ref: https://firebase.google.com/docs/
+Ref: https://console.firebase.google.com
+

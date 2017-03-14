@@ -1,0 +1,128 @@
+﻿<!doctype html>
+<html ng-app="sampleApp">
+
+<head>
+
+    <title>Firebase Template</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <!--<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />-->
+    <link type="text/css" rel="stylesheet" href="node_modules/firebaseui/dist/firebaseui.css" />
+
+
+
+</head>
+
+<body ng-controller="SampleCtrl">
+
+
+
+    <p>Our Data Here:</p>
+    <p>{{data.message}}</p><br/><br/>
+
+
+    
+
+    <div id="sign-in-status"></div>
+    <div id="sign-in"></div>
+    <div id="account-details"></div>
+
+
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script>-->
+
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+    <!--FirBaseUI-->
+    <!--<script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>-->
+    <script src="node_modules/firebaseui/dist/firebaseui.js"></script>
+
+    <!--jQuery-->
+    <script src="jquery-1.12.4.min.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBYmixohRDEBATqpyjL-bi7RM32jUJkGCw",
+            authDomain: "engage-888e6.firebaseapp.com",
+            databaseURL: "https://engage-888e6.firebaseio.com",
+            storageBucket: "engage-888e6.appspot.com",
+            messagingSenderId: "579464643282"
+        };
+        firebase.initializeApp(config);
+
+
+        // FirebaseUI config.
+        var uiConfig = {
+                signInSuccessUrl: '../index.html',
+                signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+                ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+            };
+
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            // The start method will wait until the DOM is loaded.
+            ui.start('#firebaseui-auth-container', uiConfig);
+
+
+        // Track Auth State accross all pages
+        initApp = function() {
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function(accessToken) {
+                document.getElementById('sign-in-status').textContent = 'Signed in';
+                document.getElementById('sign-in').textContent = 'Sign out';
+                document.getElementById('account-details').textContent = JSON.stringify({
+                    displayName: displayName,
+                    email: email,
+                    emailVerified: emailVerified,
+                    photoURL: photoURL,
+                    uid: uid,
+                    accessToken: accessToken,
+                    providerData: providerData
+                }, null, '  ');
+                });
+            } else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = 'null';
+            }
+            }, function(error) {
+            console.log(error);
+            });
+        };
+
+      window.addEventListener('load', function() {
+        initApp()
+      });
+
+
+
+        </script>
+
+    <!-- Custum Js -->
+    <script type="text/javascript" src="app.js"></script>
+
+
+</body>
+
+</html>
