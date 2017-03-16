@@ -44,6 +44,8 @@ then, 'git merge branchName' this merges the named Branch to the branch you are 
 <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
 <!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script> -->
 
+Install Firebase CLI, the also do a Firebase Init,Firebase status, firebase deploy, firebase serve
+
 <!-- AngularFire -->
 <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
