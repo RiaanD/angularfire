@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html ng-app="sampleApp">
+<head>
+    <title>FireBase Login</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+</head>
+<body>
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <!--FirBaseUI-->
+    <script src="node_modules/firebaseui/dist/firebaseui.js"></script>
+    <script type=text/javascript>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBYmixohRDEBATqpyjL-bi7RM32jUJkGCw",
+            authDomain: "engage-888e6.firebaseapp.com",
+            databaseURL: "https://engage-888e6.firebaseio.com",
+            storageBucket: "engage-888e6.appspot.com",
+            messagingSenderId: "579464643282"
+        };
+        firebase.initializeApp(config);
+        // FirebaseUI config.
+        var uiConfig = {
+                signInSuccessUrl: '../index.html',
+                signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+                ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+            };
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            // The start method will wait until the DOM is loaded.
+            ui.start('#firebaseui-auth-container', uiConfig);
+        </script>
+</body>
+</html>

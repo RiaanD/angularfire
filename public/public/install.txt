@@ -82,3 +82,9 @@ Ref: https://github.com/firebase/angularfire#getting-started-with-firebase
 Ref: https://firebase.google.com/docs/
 Ref: https://console.firebase.google.com
 
+Ref: Important on Auth and Tokens and Storing User Data in custom /Node area in db.
+...https://www.firebase.com/docs/web/guide/user-auth.html#section-storing
+
+
+Nice Look and Feel : http://content.k2.com/NA_70114000002FTUP
+

@@ -63,40 +63,6 @@ then, 'git merge branchName' this merges the named Branch to the branch you are 
 
 In the example above, $scope.data is going to be populated from the remote server.
 
-4.1 FireBase CLI and Hosting
-4.1.1 Install Firebase CLI
-Install Firebase CLI:
- npm install -g firebase-tools  "https://firebase.google.com/docs/hosting/quickstart"
-Initialize:
- firebase init
-Deploy:
- firebase deploy
-Test Locally:
- firebase serve
-	 
-	 ...
-	 C:\Gibson\Code\angular-git\angularfire\public>firebase deploy
-
-	=== Deploying to 'engage-888e6'...
-
-	i  deploying hosting
-	i  hosting: preparing public directory for upload...
-	+  hosting: public folder uploaded successfully
-	+  hosting: 1 files uploaded successfully
-	i  starting release process (may take several minutes)...
-
-	+  Deploy complete!
-
-	Project Console: https://console.firebase.google.com/project/engage-888e6/overview
-	Hosting URL: https://engage-888e6.firebaseapp.com
-	C:\Gibson\Code\angular-git\angularfire\public>
-	
-Using further tutorials to get it working...:
-https://github.com/firebase/FirebaseUI-Web#installation
-
-
-
-
 
 
 
@@ -115,4 +81,10 @@ Ref: https://docs.angularjs.org/tutorial
 Ref: https://github.com/firebase/angularfire#getting-started-with-firebase
 Ref: https://firebase.google.com/docs/
 Ref: https://console.firebase.google.com
+
+Ref: Important on Auth and Tokens and Storing User Data in custom /Node area in db.
+...https://www.firebase.com/docs/web/guide/user-auth.html#section-storing
+
+
+Nice Look and Feel : http://content.k2.com/NA_70114000002FTUP
 

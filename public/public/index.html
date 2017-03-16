@@ -1,44 +1,48 @@
 ﻿<!doctype html>
 <html ng-app="sampleApp">
-
 <head>
-
     <title>Firebase Template</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
-    <!--<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />-->
+    <link rel="stylesheet" href="bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="node_modules/firebaseui/dist/firebaseui.css" />
-
-
-
 </head>
-
 <body ng-controller="SampleCtrl">
+    <p>Our Data Here:</p>
+    <p>{{data.message}}</p><br/><br/>
 
-
-
-
-    <h1>Welcome to My Awesome App Sign In</h1>
-    <div id="firebaseui-auth-container"></div>
 
     <div id="sign-in-status"></div>
     <div id="sign-in"></div>
+    <div id="sign-up"></div>
+
+    <div id="signUpValidation">
+        <form>
+            <div class="form-group">
+                <label for="userEmail">Create a Sign-In</label>
+                <input type="text" class="form-control" id="userFullName" placeholder="Full Name" name="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="userContact" placeholder="Cell number" name="Cell number" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="userEmail" placeholder="Email Address" name="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="userPassword" placeholder="Password" required>
+            </div>
+            <button id="signUpSubmit" type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
     <div id="account-details"></div>
-
-
-
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-    <!--<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script>-->
 
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
-    <!--FirBaseUI-->
-    <!--<script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>-->
+    <!--FireBaseUI-->
     <script src="node_modules/firebaseui/dist/firebaseui.js"></script>
 
     <!--jQuery-->
@@ -54,34 +58,96 @@
             messagingSenderId: "579464643282"
         };
         firebase.initializeApp(config);
-
-
-        // FirebaseUI config.
-        var uiConfig = {
-                signInSuccessUrl: '../home.html',
-                signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID
-                ],
-            // Terms of service url.
-            tosUrl: '<your-tos-url>'
-            };
-
-            // Initialize the FirebaseUI Widget using Firebase.
-            var ui = new firebaseui.auth.AuthUI(firebase.auth());
-            // The start method will wait until the DOM is loaded.
-            ui.start('#firebaseui-auth-container', uiConfig);
-
             
-
-
+            // Track User Auth State accross all pages.
+                    initApp = function() {
+                        firebase.auth().onAuthStateChanged(function(user) {
+                        if (user) {
+                            // User is signed in.
+                            var displayName = user.displayName;
+                            var email = user.email;
+                            var emailVerified = user.emailVerified;
+                            var photoURL = user.photoURL;
+                            var uid = user.uid;
+                            var providerData = user.providerData;
+                            user.getToken().then(function(accessToken) {
+                            document.getElementById('sign-in-status').textContent = 'Signed in';
+                            document.getElementById('sign-in').textContent = 'Sign out';
+                            document.getElementById('sign-up').textContent = 'Sign up';
+                            document.getElementById('account-details').textContent = JSON.stringify({
+                                displayName: displayName,
+                                email: email,
+                                emailVerified: emailVerified,
+                                photoURL: photoURL,
+                                uid: uid,
+                                accessToken: accessToken,
+                                providerData: providerData
+                            }, null, '  ');
+                            });
+                        } else {
+                            // User is signed out.
+                            document.getElementById('sign-in-status').textContent = 'Signed out';
+                            document.getElementById('sign-in').textContent = 'Sign in';
+                            document.getElementById('sign-up').textContent = 'Sign up';
+                            document.getElementById('account-details').textContent = 'null';
+                        }
+                        }, function(error) {
+                        console.log(error);
+                        });
+                    };
+                    window.addEventListener('load', function() {
+                    initApp()
+                });
         </script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                // Defaults
+                $('#signUpValidation').hide();
 
-    <!-- Custum Js -->
-    <script type="text/javascript" src="app.js"></script>
+                $('#sign-in').click(function(){
+                    if($(this).html() == 'Sign out')
+                    {
+                        firebase.auth().signOut();
+                    } else
+                    {
+                        window.location.href = 'signIn.html';
+                    }
+                });
+                
+                $('#sign-up').click(function(){
+                    $('#signUpValidation').toggle();
+                });
+                $('#signUpSubmit').click(function(){
+                    var textUser = $('#userFullName').val();
+                    var textEmail = $('#userEmail').val();
+                    var textPassword = $('#userPassword').val();
+                    var textContact = $('#userContact').val();
+                    firebase.auth().createUserWithEmailAndPassword(textEmail, textPassword).then(function(user) {
+                        var userId = user.uid;
+                        alert('user creating...');
+                        function writeUserData(textEmail, userEmail, userContact, userPassword) {
+                            firebase.database().ref('User/' + userId).set({
+                                textEmail:{
+                                    AccountID: textEmail,
+                                    Email: textEmail,
+                                    Contact: textContact,
+                                    Password: textPassword}
+                            });
+                        }
+                        writeUserData(textEmail, userEmail, userContact, userPassword);
 
-
+                        $('#signUpValidation').hide();
+                    }).catch(function(error){
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        alert(errorMessage);
+                    });
+                    
+                });
+                   
+            });
+        </script>
 </body>
-
 </html>
